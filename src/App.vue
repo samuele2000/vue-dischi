@@ -1,16 +1,22 @@
 <template>
   <div id="app">
+    <HeaderComp/>
     
+    <main>
+      <CardsSongs/>
+    </main>
   </div>
 </template>
 
 <script>
-
+import HeaderComp from './components/HeaderComp.vue'
+import CardsSongs from './components/CardsSongs.vue'
 
 export default {
   name: 'App',
   components: {
-    
+    HeaderComp,
+    CardsSongs,
   }
 }
 </script>
