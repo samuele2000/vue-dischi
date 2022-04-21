@@ -1,10 +1,19 @@
 <template>
     <div class="container">
-        <div class="row">
-           <Card v-for="(element, index) in songArray.response" :key="index" :title="element.title" :year="element.year"
-            :poster="element.poster" :author="element.author" /> 
+        <div class="genere">
+            <ChoiseGenre @funzioneGenere="metodoGenere"/>
         </div>
-    </div>    
+        <div class="row">
+           <Card v-for="(element, index) in filtraggioGenere()" :key="index" 
+           :title="element.title" 
+           :year="element.year"
+           :poster="element.poster"
+           :author="element.author"  
+           :genere="element.genre"/>
+        </div>
+         
+    </div> 
+      
 
     
 
@@ -12,17 +21,20 @@
 
 <script>
     import axios from 'axios';
-    import Card from './Card.vue'
+    import Card from './partials/Card.vue'
+    import ChoiseGenre from './partials/ChoiseGenre.vue'
 
     export default {
         //Cambiare il nome con quello del componente creato
         name: 'CardsSongs',
         components: {
-            Card
+            Card,
+            ChoiseGenre
         },
         data() {
             return {
-                songArray: []
+                songArray: [],
+                genereScelto: ''
             }
         },
 
@@ -33,6 +45,24 @@
                     this.songArray = res.data
                 })
             console.log(this.songArray)
+        },
+
+        // methods
+        methods: {
+           metodoGenere(selectChoice){
+               this.genereScelto = selectChoice
+               console.log(this.genereScelto)
+           }, 
+
+           filtraggioGenere(){
+               if( this.genereScelto === '' ){
+                   return this.songArray.response
+               } else{
+                   return this.songArray.response.filter((element) =>{
+                       return element.genre.includes(this.genereScelto)
+                   })
+               }
+           }
         }
     }
 </script>
@@ -46,7 +76,9 @@
         .row{
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+        }
+        .genere{
+            text-align: end;
         }
     }
 </style>

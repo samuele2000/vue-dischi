@@ -15,7 +15,8 @@
             title: String,
             year: String,
             poster: String,
-            author: String
+            author: String,
+            genere: String
         }
     }
 </script>
@@ -25,12 +26,12 @@
     div{
         background-color: #29333D;
         text-align: center;
-        width: calc((100% / 5) - 30px);
+        width: calc((100% / 5) - 10px);
         margin: 10px 5px;
-        padding: 20px 10px 30px 10px;
+        padding: 20px 10px 10px 10px;
         h3{
             color: white;
-            font-size: 1.5em;
+            font-size: 1.3em;
             margin-bottom: 20px;
         }
         h4{
