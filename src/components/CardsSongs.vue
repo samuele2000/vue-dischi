@@ -33,6 +33,7 @@
         },
         data() {
             return {
+                genre: ['Rock','Pop', 'Jazz','Metal'],
                 songArray: [],
                 genereScelto: ''
             }
@@ -42,7 +43,8 @@
             axios.get('https://flynn.boolean.careers/exercises/api/array/music')
                 .then((res) => {
                     console.log(res.data)
-                    this.songArray = res.data
+                    this.songArray = res.data;
+
                 })
             console.log(this.songArray)
         },
@@ -57,9 +59,13 @@
            filtraggioGenere(){
                if( this.genereScelto === '' ){
                    return this.songArray.response
-               } else{
+               } else if (this.genre.includes(this.genereScelto)){
                    return this.songArray.response.filter((element) =>{
                        return element.genre.includes(this.genereScelto)
+                   })
+               } else {
+                   return this.songArray.response.filter((element) =>{
+                    return element.author.includes(this.genereScelto)
                    })
                }
            }
